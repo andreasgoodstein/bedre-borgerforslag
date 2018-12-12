@@ -1,0 +1,24 @@
+version: '3'
+services:
+  server:
+    image: node:8-alpine
+    depends_on:
+      - database
+    ports:
+      - "80:80"
+    volumes:
+      - .:/usr/src/server
+    command: sh -c "cd /usr/src/server && npm start"
+
+  database:
+    image: mongo:4
+    environment:
+      - MONGO_DATA_DIR=/data/db
+      - MONGO_LOG_DIR=/dev/null
+    ports:
+      - "27017:27017"
+    volumes:
+      - db-storage:/data/db
+    command: mongod --smallfiles
+volumes:
+  db-storage:
