@@ -11,7 +11,10 @@ const updateForslag = async () => {
         filter: { externalId: forslag.externalId },
         update: { 
           votes: forslag.votes,
-          status: forslag.status
+          status: forslag.status,
+          title: forslag.title,
+          date: forslag.date,
+          url: forslag.url
         },
         upsert: true
       } 

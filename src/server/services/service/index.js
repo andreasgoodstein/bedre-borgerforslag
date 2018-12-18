@@ -4,19 +4,12 @@ const POST_OPTIONS = {
   method: 'POST',
   headers: {
     'Content-Type': 'application/json'
-  },
-  body: JSON.stringify({
-    filter: "active",
-    sortOrder: "MostVotesFirst",
-    searchQuery: "",
-    pageNumber: 0,
-    pageSize: 1024
-  })
+  }
 }
 
 class Service {
-  async post(url) {
-    const response = await fetch(url, POST_OPTIONS)
+  async post(url, options) {
+    const response = await fetch(url, Object.assign({}, POST_OPTIONS, options))
         
     if (response.status !== 200) {
       throw Error(`Response ${response.status}`)

@@ -9,11 +9,8 @@
         "ecmaVersion": 8,
         "sourceType": "module"        
     },
-    "ecmaFeatures": {
-        "arrowFunctions": true,
-        "classes": true
-    },
     "rules": {
-        "no-console": "off"
+        "no-console": "off",
+        "semi": ["error", "never"]
     }
 }

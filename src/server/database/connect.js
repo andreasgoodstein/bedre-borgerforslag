@@ -1,7 +1,9 @@
 const mongoose = require('mongoose')
 
+const DB_URL = process.env.MONGODB_URI || 'mongodb://database'
+
 const connect = () => {
-  mongoose.connect('mongodb://database')
+  mongoose.connect(DB_URL, { useNewUrlParser: true })
 
   const db = mongoose.connection
 
