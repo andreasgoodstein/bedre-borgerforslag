@@ -1,89 +1,85 @@
-const ForslagService = require('../../services/forslag')
-const Forslag = require('../../database/models/forslag')
-const Update = require('../../database/models/update')
+const ForslagService = require('../../services/forslag');
+const Forslag = require('../../database/models/forslag');
+const Update = require('../../database/models/update');
 
-const { forslagIsExpires } = require('../../helpers/date')
+const { forslagIsExpires } = require('../../helpers/date');
 
 const updateForslag = async () => {
-  const forslagService = new ForslagService()
+  const forslagService = new ForslagService();
 
-  const forslagFromService = await forslagService.getAllForslag()
+  const forslagFromService = await forslagService.getAllForslag();
 
-  const serviceIds = forslagFromService.map((forslag) => forslag.externalId)
+  const serviceIds = forslagFromService.map(forslag => forslag.externalId);
 
-  const forslagFromDb = await getForslagListFromDb(serviceIds)
+  const forslagFromDb = await getForslagListFromDb(serviceIds);
 
   const forslagFromDbMap = forslagFromDb.reduce((map, forslag) => {
-    map.set(forslag.externalId, forslag)
-    return map
-  }, new Map())
+    map.set(forslag.externalId, forslag);
+    return map;
+  }, new Map());
 
-  const forslagTaskList = []
-  const updateTaskList = []
+  const forslagTaskList = [];
+  const updateTaskList = [];
 
-  forslagFromService.forEach((forslag) => {    
-    const updateTask = { 
+  forslagFromService.forEach((forslag) => {
+    const updateTask = {
       updateOne: {
         filter: { externalId: forslag.externalId },
-        update: { 
+        update: {
           votes: forslag.votes,
           status: getForslagStatus(forslag),
           title: forslag.title,
           date: forslag.date,
-          url: forslag.url
+          url: forslag.url,
         },
-        upsert: true
-      } 
-    }
-    
-    forslagTaskList.push(updateTask)
+        upsert: true,
+      },
+    };
 
-    const oldForslag = forslagFromDbMap.get(forslag.externalId)
-    
+    forslagTaskList.push(updateTask);
+
+    const oldForslag = forslagFromDbMap.get(forslag.externalId);
+
     if (oldForslag && forslagHasUpdated(oldForslag, forslag)) {
       updateTaskList.push({
         externalId: forslag.externalId,
         votes: forslag.votes,
-        updated: new Date()
-      })
+        updated: new Date(),
+      });
     }
-  })
+  });
 
   if (forslagTaskList.length > 0) {
-    await Forslag.bulkWrite(forslagTaskList)
+    await Forslag.bulkWrite(forslagTaskList);
   }
 
   if (updateTaskList.length > 0) {
-    await Update.insertMany(updateTaskList)
+    await Update.insertMany(updateTaskList);
   }
-}
+};
 
-const getForslagListFromDb = async (externalIdArray) => {
-  return await Forslag.find({
-    externalId: {
-      $in: externalIdArray
-    }
-  })
-}
+const getForslagListFromDb = async externalIdArray => await Forslag.find({
+  externalId: {
+    $in: externalIdArray,
+  },
+});
 
 const getForslagStatus = (forslag) => {
   if (forslag.status === 'Available') {
-    return 'Available'
+    return 'Available';
   }
 
   if (forslag.votes >= 50000) {
-    return 'Accepted'
+    return 'Accepted';
   }
-  
+
   if (forslagIsExpires(forslag.date)) {
-    return 'Expired'
+    return 'Expired';
   }
 
-  return forslag.status
-}
+  return forslag.status;
+};
 
-const forslagHasUpdated = (oldForslag, newForslag) => {
-  return oldForslag.votes !== newForslag.votes
-}
+const forslagHasUpdated = (oldForslag, newForslag) => oldForslag.votes !== newForslag.votes;
 
-module.exports = { updateForslag }
+module.exports = { updateForslag };

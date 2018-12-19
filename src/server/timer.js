@@ -1,21 +1,20 @@
-const { updateForslag } = require('./logic/updateforslag')
-const { connect } = require('./database/connect')
+const { updateForslag } = require('./logic/updateforslag');
+const { connect } = require('./database/connect');
 
 const runUpdate = async () => {
-    try {
-        console.log('Running update job')
-        
-        connect()
-        await updateForslag()
+  try {
+    console.log('Running update job');
 
-        console.log('Finished update')
+    connect();
+    await updateForslag();
 
-        process.exit()  
-    } 
-    catch (error) {
-        console.error(error)
-        process.exit()
-    }
-}
+    console.log('Finished update');
 
-runUpdate()  
+    process.exit();
+  } catch (error) {
+    console.error(error);
+    process.exit();
+  }
+};
+
+runUpdate();

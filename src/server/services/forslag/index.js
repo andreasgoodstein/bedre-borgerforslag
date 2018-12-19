@@ -1,22 +1,22 @@
-const Service = require('../service')
+const Service = require('../service');
 
-const FORSLAG_URL = 'https://www.borgerforslag.dk/api/proposals/search'
+const FORSLAG_URL = 'https://www.borgerforslag.dk/api/proposals/search';
 
 const forslagsOptions = {
   body: JSON.stringify({
-    sortOrder: "NewestFirst",
-    searchQuery: "",
+    sortOrder: 'NewestFirst',
+    searchQuery: '',
     pageNumber: 0,
-    pageSize: 1024
-  })
-}
+    pageSize: 1024,
+  }),
+};
 
 class ForslagService extends Service {
   async getAllForslag() {
-    const forslag = await this.post(FORSLAG_URL, forslagsOptions)
+    const forslag = await this.post(FORSLAG_URL, forslagsOptions);
 
-    return forslag.data || []
+    return forslag.data || [];
   }
 }
 
-module.exports = ForslagService
+module.exports = ForslagService;

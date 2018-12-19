@@ -1,14 +1,14 @@
-const express = require('express')
+const express = require('express');
 
-const database = require('./database/connect')
-const getAll = require('./routes/getall')
+const database = require('./database/connect');
+const { registerRoutes } = require('./routes');
 
-const PORT = process.env.PORT || 80
+const PORT = process.env.PORT || 80;
 
-database.connect()
+database.connect();
 
-const app = express()
+const app = express();
 
-app.get('*', getAll)
+registerRoutes(app);
 
-app.listen(PORT)
+app.listen(PORT);

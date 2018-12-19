@@ -1,11 +1,11 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 
 const requestSchema = new mongoose.Schema({
   externalId: String,
   votes: Number,
-  updated: Date
-})
+  updated: Date,
+});
 
-const requestModel = mongoose.model('Update', requestSchema, 'update')
+const requestModel = mongoose.model('Update', requestSchema, 'update');
 
-module.exports = requestModel
+module.exports = requestModel;
