@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 
 const requestSchema = new mongoose.Schema({
   externalId: { type: String, unique: true },
@@ -6,9 +6,9 @@ const requestSchema = new mongoose.Schema({
   date: String,
   votes: Number,
   status: String,
-  url: String
-})
+  url: String,
+});
 
-const requestModel = mongoose.model('Forslag', requestSchema, 'forslag')
+const requestModel = mongoose.model('Forslag', requestSchema, 'forslag');
 
-module.exports = requestModel
+module.exports = requestModel;
