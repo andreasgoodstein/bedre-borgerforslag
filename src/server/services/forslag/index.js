@@ -4,7 +4,7 @@ const FORSLAG_URL = 'https://www.borgerforslag.dk/api/proposals/search'
 
 const forslagsOptions = {
   body: JSON.stringify({
-    sortOrder: "MostVotesFirst",
+    sortOrder: "NewestFirst",
     searchQuery: "",
     pageNumber: 0,
     pageSize: 1024
@@ -12,7 +12,7 @@ const forslagsOptions = {
 }
 
 class ForslagService extends Service {
-  async getAllActiveForslag() {
+  async getAllForslag() {
     const forslag = await this.post(FORSLAG_URL, forslagsOptions)
 
     return forslag.data || []
