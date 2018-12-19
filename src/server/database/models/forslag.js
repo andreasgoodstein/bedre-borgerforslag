@@ -9,6 +9,6 @@ const requestSchema = new mongoose.Schema({
   url: String
 })
 
-const requestModel = mongoose.model('Forslag', requestSchema)
+const requestModel = mongoose.model('Forslag', requestSchema, 'forslag')
 
 module.exports = requestModel

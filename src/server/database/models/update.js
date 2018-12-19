@@ -6,6 +6,6 @@ const requestSchema = new mongoose.Schema({
   updated: Date
 })
 
-const requestModel = mongoose.model('Update', requestSchema)
+const requestModel = mongoose.model('Update', requestSchema, 'update')
 
 module.exports = requestModel

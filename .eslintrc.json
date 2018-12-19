@@ -3,17 +3,15 @@
         "eslint:recommended"
     ],
     "env": {
-        "node": true
+        "node": true,
+        "es6": true
     },
     "parserOptions": {
         "ecmaVersion": 8,
         "sourceType": "module"        
     },
-    "ecmaFeatures": {
-        "arrowFunctions": true,
-        "classes": true
-    },
     "rules": {
-        "no-console": "off"
+        "no-console": "off",
+        "semi": ["error", "never"]
     }
 }
