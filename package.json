@@ -12,12 +12,16 @@
   "author": "Andreas Goodstein",
   "license": "ISC",
   "dependencies": {
+    "apicache": "^1.2.3",
+    "compression": "^1.7.3",
     "express": "^4.16.4",
-    "mongoose": "^5.3.16",
-    "node-fetch": "^2.3.0",
-    "nodemon": "^1.18.8"
+    "mongoose": "^5.4.0",
+    "node-fetch": "^2.3.0"
   },
   "devDependencies": {
-    "eslint": "^5.10.0"
+    "eslint": "^5.10.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "nodemon": "^1.18.9"
   }
 }
