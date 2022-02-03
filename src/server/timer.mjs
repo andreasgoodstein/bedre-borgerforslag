@@ -1,14 +1,14 @@
-const { updateForslag } = require('./logic/updateforslag');
-const { connect } = require('./database/connect');
+import { updateForslag } from "./logic/updateforslag/index.mjs";
+import { connect } from "./database/connect.mjs";
 
 const runUpdate = async () => {
   try {
-    console.log('Running update job');
+    console.log("Running update job");
 
     connect();
     await updateForslag();
 
-    console.log('Finished update');
+    console.log("Finished update");
 
     process.exit();
   } catch (error) {

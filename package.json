@@ -1,27 +1,26 @@
 {
   "name": "bedreforslag",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
   "scripts": {
-    "start": "node src/server/server.js",
-    "start:dev": "nodemon --legacy-watch src/server/server.js",
-    "update:db": "node src/server/timer.js"
+    "start": "node ./src/server/server.mjs",
+    "start:dev": "nodemon --legacy-watch ./src/server/server.mjs",
+    "update:db": "node ./src/server/timer.mjs"
   },
   "keywords": [],
   "author": "Andreas Goodstein",
   "license": "ISC",
   "dependencies": {
-    "apicache": "^1.2.3",
-    "compression": "^1.7.3",
-    "express": "^4.16.4",
-    "mongoose": "^5.4.0",
-    "node-fetch": "^2.3.0"
+    "apicache": "1.6.3",
+    "compression": "1.7.4",
+    "express": "4.17.2",
+    "mongoose": "6.2.0",
+    "node-fetch": "3.2.0"
   },
   "devDependencies": {
-    "eslint": "^5.10.0",
-    "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-plugin-import": "^2.14.0",
-    "nodemon": "^1.18.9"
+    "eslint": "8.8.0",
+    "eslint-config-airbnb-base": "15.0.0",
+    "eslint-config-prettier": "8.3.0",
+    "nodemon": "2.0.15",
+    "prettier": "2.5.1"
   }
 }
